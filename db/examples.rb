@@ -17,3 +17,18 @@
 #                password: 'abc123',
 #                password_confirmation: nil)
 # end
+
+Song.create([
+              { song_title: 'song1',
+                artist_name: 'artist1',
+                song_url: 'abc' },
+              { song_title: 'song1',
+                artist_name: 'artist1',
+                song_url: 'abc' },
+              { song_title: 'song1',
+                artist_name: 'artist1',
+                song_url: 'abc' },
+              { song_title: 'song1',
+                artist_name: 'artist1',
+                song_url: 'abc' }
+            ])
