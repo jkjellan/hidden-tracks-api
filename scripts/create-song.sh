@@ -4,9 +4,9 @@ curl --include --request POST http://localhost:4741/songs \
   --header "Content-Type: application/json" \
   --data '{
     "song": {
-      "song_title": "song1",
-      "artist_name": "artist1",
-      "song_url": "def"
+      "song_title": "Either Way",
+      "artist_name": "Wilco",
+      "song_url": "https://www.youtube.com/watch?v=otz5V3RnG1Q"
     }
   }'
 

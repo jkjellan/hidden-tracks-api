@@ -1,8 +1,12 @@
+# frozen_string_literal: true
+
 class SongsController < ApplicationController
   before_action :set_song, only: [:show, :update, :destroy]
 
   # GET /songs
   def index
+    # Somehow I need to find a way to do: Song.where(user_id: current_user.id
+    # @songs = Song.where(user_id: 4)
     @songs = Song.all
 
     render json: @songs
@@ -15,6 +19,7 @@ class SongsController < ApplicationController
 
   # POST /songs
   def create
+    # puts 'song_params are ' + song_params
     @song = Song.new(song_params)
 
     if @song.save
@@ -46,6 +51,6 @@ class SongsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def song_params
-      params.require(:song).permit(:song_title, :artist_name, :song_url)
+      params.require(:song).permit(:song_title, :artist_name, :song_url, :user_id)
     end
 end
