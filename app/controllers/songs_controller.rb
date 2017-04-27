@@ -1,14 +1,15 @@
 # frozen_string_literal: true
 
-class SongsController < ApplicationController
+class SongsController < OpenReadController
   before_action :set_song, only: [:show, :update, :destroy]
 
   # GET /songs
   def index
     # Somehow I need to find a way to do: Song.where(user_id: current_user.id
     # @songs = Song.where(user_id: 4)
-    @songs = Song.all
-
+    # @songs = Song.where('user_id = :user', user: current_user.id)
+    # @songs = Song.all
+    @songs = current_user.songs
     render json: @songs
   end
 
@@ -20,7 +21,7 @@ class SongsController < ApplicationController
   # POST /songs
   def create
     # puts 'song_params are ' + song_params
-    @song = Song.new(song_params)
+    @song = current_user.songs.build(song_params)
 
     if @song.save
       render json: @song, status: :created, location: @song
@@ -43,14 +44,16 @@ class SongsController < ApplicationController
     @song.destroy
   end
 
-  private
     # Use callbacks to share common setup or constraints between actions.
     def set_song
-      @song = Song.find(params[:id])
+      # @song = Song.find(params[:id])
+      @song = current_user.songs.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
     def song_params
-      params.require(:song).permit(:song_title, :artist_name, :song_url, :user_id)
+      params.require(:song).permit(:song_title, :artist_name, :song_url)
     end
+
+  private :set_song, :song_params
 end
