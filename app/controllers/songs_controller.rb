@@ -32,7 +32,7 @@ class SongsController < OpenReadController
 
   # PATCH/PUT /songs/1
   def update
-    if @song.update(song_params)
+    if @song.update(edit_song_params)
       render json: @song
     else
       render json: @song.errors, status: :unprocessable_entity
@@ -53,6 +53,10 @@ class SongsController < OpenReadController
     # Only allow a trusted parameter "white list" through.
     def song_params
       params.require(:song).permit(:song_title, :artist_name, :song_url)
+    end
+
+    def edit_song_params
+      params.require(:song).permit(:song_title, :artist_name)
     end
 
   private :set_song, :song_params
