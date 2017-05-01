@@ -1,10 +1,8 @@
 [![General Assembly Logo](https://camo.githubusercontent.com/1a91b05b8f4d44b5bbfb83abac2b0996d8e26c92/687474703a2f2f692e696d6775722e636f6d2f6b6538555354712e706e67)](https://generalassemb.ly/education/web-development-immersive)
 
-# rails-api-template
+# hidden-tracks-api
 
-A template for starting projects with `rails-api`. Includes authentication.
-
-At the beginning of each cohort, update the versions in [`Gemfile`](Gemfile).
+An API for my Hidden Tracks music discovery application, based on the rails-api-template
 
 ## Dependencies
 
@@ -77,6 +75,46 @@ built-in user authentication documentation.
 Scripts are included in [`scripts`](scripts) to test built-in actions. Add your
 own scripts to test your custom API. As an alternative, you can write automated
 tests in RSpec to test your API.
+
+### Song Catalog
+
+| Verb   | URI Pattern            | Controller#Action |
+|--------|------------------------|-------------------|
+| GET    | `/songs`               | `songs#index`     |
+| POST   | `/songs`               | `songs#create`    |
+| PATCH  | `/songs/:id`           | `songs#update`    |
+| DELETE | `/songs/:id`           | `songs#destory`   |
+
+#### POST /songs
+
+Request:
+
+```sh
+curl --include --request POST http://localhost:4741/songs \
+  --header "Content-Type: application/json" \
+  --data '{
+    "song": {
+      "song_title": "Either Way",
+      "artist_name": "Wilco",
+      "song_url": "https://www.youtube.com/watch?v=otz5V3RnG1Q"
+    }
+  }'
+```
+
+Response:
+
+```md
+HTTP/1.1 201 Created
+Content-Type: application/json; charset=utf-8
+
+{
+  "user": {
+    "id": 1,
+    "email": "ava@bob.com"
+  }
+}
+```
+
 
 ### Authentication
 
