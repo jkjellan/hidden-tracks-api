@@ -2,6 +2,8 @@
 
 # hidden-tracks-api
 
+[hidden-tracks-client](https://github.com/jkjellan/hidden-tracks-client)
+
 An API for my Hidden Tracks music discovery application, based on the rails-api-template
 
 ## Dependencies
@@ -92,6 +94,7 @@ Request:
 ```sh
 curl --include --request POST http://localhost:4741/songs \
   --header "Content-Type: application/json" \
+  --header "Authorization: Token token=$TOKEN" \
   --data '{
     "song": {
       "song_title": "Either Way",
@@ -101,18 +104,49 @@ curl --include --request POST http://localhost:4741/songs \
   }'
 ```
 
-Response:
+#### GET /songs
 
-```md
-HTTP/1.1 201 Created
-Content-Type: application/json; charset=utf-8
+Request:
 
-{
-  "user": {
-    "id": 1,
-    "email": "ava@bob.com"
-  }
-}
+```sh
+curl --include --request GET http://localhost:4741/songs \
+  --header "Authorization: Token token=$TOKEN" \
+  --header "Content-Type: application/json"
+```
+
+#### GET /songs/:id
+
+Request:
+
+```sh
+curl --include --request GET http://localhost:4741/songs/1 \
+  --header "Authorization: Token token=$TOKEN" \
+  --header "Content-Type: application/json"
+```
+
+#### PATCH /songs/:id
+
+Request:
+
+```sh
+curl --include --request PATCH http://localhost:4741/songs/1 \
+  --header "Content-Type: application/json" \
+  --header "Authorization: Token token=$TOKEN" \
+  --data '{
+    "song": {
+      "song_title": "Test Artist - Test Title"
+    }
+  }'
+```
+
+#### DELETE /songs/:id
+
+Request:
+
+```sh
+curl --include --request DELETE http://localhost:4741/songs/1 \
+  --header "Authorization: Token token=$TOKEN" \
+  --header "Content-Type: application/json"
 ```
 
 
