@@ -10,6 +10,7 @@ class SongsController < OpenReadController
     # @songs = Song.where('user_id = :user', user: current_user.id)
     # @songs = Song.all
     @songs = current_user.songs
+    # @songs = Song.all
     render json: @songs
   end
 
@@ -44,20 +45,20 @@ class SongsController < OpenReadController
     @song.destroy
   end
 
-    # Use callbacks to share common setup or constraints between actions.
-    def set_song
-      # @song = Song.find(params[:id])
-      @song = current_user.songs.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_song
+    # @song = Song.find(params[:id])
+    @song = current_user.songs.find(params[:id])
+  end
 
-    # Only allow a trusted parameter "white list" through.
-    def song_params
-      params.require(:song).permit(:song_title, :artist_name, :song_url)
-    end
+  # Only allow a trusted parameter "white list" through.
+  def song_params
+    params.require(:song).permit(:song_title, :artist_name, :song_url)
+  end
 
-    def edit_song_params
-      params.require(:song).permit(:song_title, :artist_name)
-    end
+  def edit_song_params
+    params.require(:song).permit(:song_title, :artist_name)
+  end
 
   private :set_song, :song_params
 end
